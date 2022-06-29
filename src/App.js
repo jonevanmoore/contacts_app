@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Material UI Imports
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import { CssBaseline } from "@material-ui/core";
 
 // Component Imports
@@ -15,7 +15,8 @@ import HomePage from "./components/pages/HomePage";
 import NoPageFound from "./components/pages/NoPageFound";
 import TestPage from "./components/pages/TestPage";
 import SettingsPage from "./components/pages/SettingsPage";
-import Contacts from "./components/pages/ContactsPage"
+import Contacts from "./components/pages/ContactsPage";
+import OneContact from './components/pages/OneContact';
 
 // Action Imports
 import { setSettings } from "./actions/settings-actions";
@@ -39,7 +40,7 @@ class App extends Component {
 
   render() {
 
-    const theme = createMuiTheme(this.props.settings);
+    const theme = createTheme(this.props.settings);
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -51,6 +52,7 @@ class App extends Component {
             <Route path={"/test"} exact /*strict*/ component={TestPage} />
             <Route path={"/settings"} exact /*strict*/ component={SettingsPage} />
             <Route path={"/contacts"} exact component={Contacts} />
+            <Route path={"/contacts/:id"} exact component={OneContact} />
             <Route exact /*strict*/ component={NoPageFound} />
           </Switch>
         </Router>
