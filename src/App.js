@@ -52,7 +52,7 @@ class App extends Component {
             <Route path={"/test"} exact /*strict*/ component={TestPage} />
             <Route path={"/settings"} exact /*strict*/ component={SettingsPage} />
             <Route path={"/contacts"} exact component={Contacts} />
-            <Route path={"/contacts/:id"} exact component={OneContact} />
+            <Route path={"/contacts/:contactId"} exact component={OneContact} />
             <Route exact /*strict*/ component={NoPageFound} />
           </Switch>
         </Router>
