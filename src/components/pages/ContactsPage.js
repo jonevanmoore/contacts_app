@@ -36,10 +36,16 @@ const Contact = () => {
         } else if (contactDisplay === 'none') {
             setContactDisplay('block')
             setEditDisplay('none')
+            setNewName('')
+            setNewEmail('')
+            setNewPhone('')
         }
         if (setEditDisplay === 'block') {
             setEditDisplay('none')
             setContactDisplay('block')
+            setNewName('')
+            setNewEmail('')
+            setNewPhone('')
         } else if (editDisplay === 'none') {
             setEditDisplay('block')
             setContactDisplay('none')
@@ -84,11 +90,6 @@ const Contact = () => {
                 <button onClick={changeDisplay} className='add-con-btn'>Cancel</button>
 
             </div>
-            {/* <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                        <span>Name</span>
-                        <span>Phone</span>
-                        <span>Email</span>
-                    </div> */}
             {contacts.map(contact => (
                 <OneContact contact={contact} key={contact?.id} />
             ))}

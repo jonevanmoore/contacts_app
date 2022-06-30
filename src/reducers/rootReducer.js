@@ -10,8 +10,7 @@ export const rootReducer = combineReducers({
 
 
 const allEnhancers = compose(
-    applyMiddleware(reduxPromise, thunk)/*,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()*/
+    applyMiddleware(reduxPromise, thunk)
 );
 
 export const store = createStore(

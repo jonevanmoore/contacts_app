@@ -1,6 +1,5 @@
-import { useParams, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import { useState } from "react"
 import { destroyContact, updateContact } from "../../reducers/contacts";
 
 // import DeleteIcon from '@mui/icons-material/Delete';
@@ -30,10 +29,16 @@ const OneContact = ({ contact }) => {
         } else if (contactDisplay === 'none') {
             setContactDisplay('block')
             setEditDisplay('none')
+            setName(contact?.name)
+            setPhone(contact?.phone)
+            setEmail(contact?.email)
         }
         if (setEditDisplay === 'block') {
             setEditDisplay('none')
             setContactDisplay('block')
+            setName(contact?.name)
+            setPhone(contact?.phone)
+            setEmail(contact?.email)
         } else if (editDisplay === 'none') {
             setEditDisplay('block')
             setContactDisplay('none')
@@ -47,7 +52,7 @@ const OneContact = ({ contact }) => {
 
     return (
         <>
-            <div style={{ display: 'flex', border: '1px white solid', borderRadius: '10px', marginBottom: '20px', padding: '20px' }}>
+            <div style={{ display: 'flex', border: '1px white solid', borderRadius: '10px', marginBottom: '20px', padding: '20px' }} key={id}>
                 <div style={{ display: `${contactDisplay}` }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
 
