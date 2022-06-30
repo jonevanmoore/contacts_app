@@ -1,6 +1,7 @@
 const GET_CONTACTS = 'contacts/GET_CONTACTS'
 const GET_CONTACT = 'contacts/GET_CONTACT'
 const CREATE_CONTACT = 'contacts/CREATE_CONTACT'
+const DELETE_CONTACT = 'contact/DELETE_CONTECT'
 
 export const getContacts = (contacts) => {
     return {
@@ -20,6 +21,13 @@ export const createContact = (contact) => {
     return {
         type: CREATE_CONTACT,
         contact
+    }
+}
+
+export const deleteContact = (contactId) => {
+    return {
+        type: DELETE_CONTACT,
+        contactId
     }
 }
 
@@ -58,6 +66,17 @@ export const newContact = (contact) => async (dispatch) => {
     }
 }
 
+//DELETE CONTACT
+export const destroyContact = (contactId) => async (dispatch) => {
+    const res = await fetch(`https://tester.crs-consulting.com/api/entry?id=${contactId}`, {
+        method: 'DELETE'
+    })
+
+    const deletedContact = await res.json();
+    await dispatch(deleteContact(deletedContact))
+
+}
+
 const initialState = {};
 
 const contactsReducer = (state = initialState, action) => {
@@ -74,6 +93,9 @@ const contactsReducer = (state = initialState, action) => {
         case CREATE_CONTACT:
             newState[action.contact.id] = action.contact;
             return newState;
+        case DELETE_CONTACT:
+            delete newState[action.contactId]
+            return newState
         default:
             return state
     }
