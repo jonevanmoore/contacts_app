@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import OneContact from "./OneContact"
 import './ContactsPage.css'
 
+import AddIcon from '@material-ui/icons/Add';
+
 const Contact = () => {
     const dispatch = useDispatch()
     const contacts = Object.values(useSelector(state => state.contacts))
@@ -37,8 +39,6 @@ const Contact = () => {
                 <OneContact contact={contact} key={contact?.id} />
             ))}
             <div>
-
-
                 <input
                     value={newName}
                     onChange={e => setNewName(e.target.value)}
@@ -59,6 +59,7 @@ const Contact = () => {
                 >
                 </input>
                 <button onClick={createNewContact}>CREATE</button>
+                <AddIcon onClick={createNewContact} />
 
             </div>
         </>

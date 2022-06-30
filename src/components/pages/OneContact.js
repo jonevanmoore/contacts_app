@@ -1,7 +1,10 @@
 import { useParams, useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { destroyContact, updateContact } from "../../reducers/contacts"
+import { destroyContact, updateContact } from "../../reducers/contacts";
+
+// import DeleteIcon from '@mui/icons-material/Delete';
+import { Delete } from "@material-ui/icons";
 
 const OneContact = ({ contact }) => {
     const dispatch = useDispatch()
@@ -89,8 +92,7 @@ const OneContact = ({ contact }) => {
                     ></input>
                     <button onClick={updateOneContact}>UPDATE</button>
                 </div>
-
-                <button onClick={() => deleteOneContact(contact?.id)}>DELETE CONTACT</button>
+                <Delete onClick={() => deleteOneContact(contact?.id)} />
                 <button onClick={changeDisplay}>EDIT</button>
 
             </div>
