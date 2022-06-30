@@ -1,13 +1,14 @@
-import { fetchContacts, newContact, destroyContact } from "../../reducers/contacts"
+import { fetchContacts, newContact } from "../../reducers/contacts"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import OneContact from "./OneContact"
 import './ContactsPage.css'
 
 const Contact = () => {
     const dispatch = useDispatch()
     const contacts = Object.values(useSelector(state => state.contacts))
 
+    //NEW CONTACT
     const [newName, setNewName] = useState('')
     const [newPhone, setNewPhone] = useState('')
     const [newEmail, setNewEmail] = useState('')
@@ -21,10 +22,7 @@ const Contact = () => {
         setNewName('')
         setNewEmail('')
         setNewPhone('')
-    }
-
-    const deleteContact = async (contactId) => {
-        await dispatch(destroyContact(contactId))
+        window.location.reload(true);
     }
 
     return (
@@ -35,80 +33,33 @@ const Contact = () => {
                 <span>Phone</span>
                 <span>Email</span>
             </div>
-            {contacts.map((contact, i) => {
-                const contactId = contact?.id
-                return (
-                    <>
-                        {(contact?.name || contact?.phone || contact?.email) && (
-                            <div style={{ display: 'flex' }}>
-                                {contact?.name && (
-                                    <td>
-                                        <Link key={contactId} to={`/contacts/${contactId}`} className='contact_link'>{contact?.name}</Link>
-                                    </td>
-                                )}
-                                {!contact?.name && (
-                                    <td>
-                                        <span>Add name</span>
-                                    </td>
-                                )}
-
-
-
-                                {contact?.phone && (
-                                    <td>
-                                        <span>{contact?.phone}</span>
-                                    </td>
-                                )}
-                                {!contact?.phone && (
-                                    <td>
-                                        <span>Add Phone Number</span>
-                                    </td>
-                                )}
-
-
-
-                                {contact?.email && (
-                                    <td>
-                                        <span>{contact?.email}</span>
-                                    </td>
-                                )}
-                                {!contact?.email && (
-                                    <td>
-                                        <span>Add Email Address</span>
-                                    </td>
-                                )}
-
-
-                                {/* <button onClick={deleteContact(contact?.id)}>DELETE CONTACT</button> */}
-                            </div>
-                        )}
-                    </>
-                )
-            })}
+            {contacts.map(contact => (
+                <OneContact contact={contact} />
+            ))}
             <div>
-                <form onSubmit={createNewContact}>
 
-                    <input
-                        value={newName}
-                        onChange={e => setNewName(e.target.value)}
-                        placeholder='Name*'
-                        required={true}
-                    >
-                    </input>
-                    <input
-                        value={newPhone}
-                        onChange={e => setNewPhone(e.target.value)}
-                        placeholder='Phone Number'
-                    >
-                    </input>
-                    <input
-                        value={newEmail}
-                        onChange={e => setNewEmail(e.target.value)}
-                        placeholder='Email Address'
-                    >
-                    </input>
-                    <button>CREATE</button>
-                </form>
+
+                <input
+                    value={newName}
+                    onChange={e => setNewName(e.target.value)}
+                    placeholder='Name*'
+                    required={true}
+                >
+                </input>
+                <input
+                    value={newPhone}
+                    onChange={e => setNewPhone(e.target.value)}
+                    placeholder='Phone Number'
+                >
+                </input>
+                <input
+                    value={newEmail}
+                    onChange={e => setNewEmail(e.target.value)}
+                    placeholder='Email Address'
+                >
+                </input>
+                <button onClick={createNewContact}>CREATE</button>
+
             </div>
         </>
     )
