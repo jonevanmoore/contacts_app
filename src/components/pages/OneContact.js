@@ -1,12 +1,13 @@
 import { useParams, useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
-import { destroyContact, newContact } from "../../reducers/contacts"
+import { destroyContact, updateContact } from "../../reducers/contacts"
 
 const OneContact = ({ contact }) => {
     const dispatch = useDispatch()
 
     //EXISTING CONTACT
+    const id = contact?.id
     const [name, setName] = useState(contact?.name)
     const [phone, setPhone] = useState(contact?.phone)
     const [email, setEmail] = useState(contact?.email)
@@ -34,6 +35,11 @@ const OneContact = ({ contact }) => {
             setEditDisplay('block')
             setContactDisplay('none')
         }
+    }
+
+    const updateOneContact = async () => {
+        await dispatch(updateContact({ id, name, phone, email }))
+        window.location.reload(true);
     }
 
     return (
@@ -81,6 +87,7 @@ const OneContact = ({ contact }) => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     ></input>
+                    <button onClick={updateOneContact}>UPDATE</button>
                 </div>
 
                 <button onClick={() => deleteOneContact(contact?.id)}>DELETE CONTACT</button>

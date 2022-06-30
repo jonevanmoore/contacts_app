@@ -34,7 +34,7 @@ const Contact = () => {
                 <span>Email</span>
             </div>
             {contacts.map(contact => (
-                <OneContact contact={contact} />
+                <OneContact contact={contact} key={contact?.id} />
             ))}
             <div>
 

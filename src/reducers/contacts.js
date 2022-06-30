@@ -2,6 +2,7 @@ const GET_CONTACTS = 'contacts/GET_CONTACTS'
 const GET_CONTACT = 'contacts/GET_CONTACT'
 const CREATE_CONTACT = 'contacts/CREATE_CONTACT'
 const DELETE_CONTACT = 'contact/DELETE_CONTECT'
+const EDIT_CONTACT = 'contact/EDIT_CONTACT'
 
 export const getContacts = (contacts) => {
     return {
@@ -20,6 +21,13 @@ export const getContact = (contact) => {
 export const createContact = (contact) => {
     return {
         type: CREATE_CONTACT,
+        contact
+    }
+}
+
+export const editContact = (contact) => {
+    return {
+        type: EDIT_CONTACT,
         contact
     }
 }
@@ -77,6 +85,24 @@ export const destroyContact = (contactId) => async (dispatch) => {
 
 }
 
+//EDIT CONTACT
+export const updateContact = (contact) => async (dispatch) => {
+    const res = await fetch(`https://tester.crs-consulting.com/api/entry?id=${contact.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contact)
+    });
+
+    const updatedContact = await res.json();
+
+    if (res.ok) {
+        await dispatch(editContact(updatedContact));
+        return updatedContact
+    } else {
+        console.log(updatedContact.errors)
+    }
+}
+
 const initialState = {};
 
 const contactsReducer = (state = initialState, action) => {
@@ -96,6 +122,9 @@ const contactsReducer = (state = initialState, action) => {
         case DELETE_CONTACT:
             delete newState[action.contactId]
             return newState
+        case EDIT_CONTACT:
+            newState[action.contact.id] = action.contact
+            return newState;
         default:
             return state
     }
