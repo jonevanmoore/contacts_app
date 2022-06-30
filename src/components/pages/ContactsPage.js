@@ -80,7 +80,7 @@ const Contact = () => {
                     className='new-input'
                 >
                 </input>
-                <AddIcon onClick={createNewContact} className='icon-style add-con-icon' />
+                <AddIcon onClick={createNewContact} className='add-con-icon' />
                 <button onClick={changeDisplay} className='add-con-btn'>Cancel</button>
 
             </div>

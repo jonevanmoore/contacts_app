@@ -42,7 +42,7 @@ const OneContact = ({ contact }) => {
 
     const updateOneContact = async () => {
         await dispatch(updateContact({ id, name, phone, email }))
-        window.location.reload(true);
+        // window.location.reload(true);
     }
 
     return (
@@ -51,33 +51,33 @@ const OneContact = ({ contact }) => {
                 <div style={{ display: `${contactDisplay}` }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', float: 'left' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', marginBottom: '10px', float: 'left' }}>
                             <span style={{ fontSize: 'small' }}>Name</span>
                             {contact?.name && (
-                                <span to={`/contacts/${contact?.id}`}>{contact?.name}</span>
+                                <span style={{ color: 'black' }}>{contact?.name}</span>
                             )}
                             {!contact?.name && (
-                                <span key={contact?.id}>n/a</span>
+                                <span key={contact?.id} style={{ color: 'black' }}>n/a</span>
                             )}
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', marginBottom: '10px' }}>
                             <span style={{ fontSize: 'small' }}>Phone</span>
                             {contact?.phone && (
-                                <span>{contact?.phone}</span>
+                                <span style={{ color: 'black' }}>{contact?.phone}</span>
                             )}
                             {!contact?.phone && (
-                                <span>n/a</span>
+                                <span style={{ color: 'black' }}>n/a</span>
                             )}
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', float: 'right' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', float: 'right', marginBottom: '10px' }}>
                             <span style={{ fontSize: 'small' }}>Email</span>
                             {contact?.email && (
-                                <span>{contact?.email}</span>
+                                <span style={{ color: 'black' }}>{contact?.email}</span>
                             )}
                             {!contact?.email && (
-                                <span>n/a</span>
+                                <span style={{ color: 'black' }}>n/a</span>
                             )}
                         </div>
 
