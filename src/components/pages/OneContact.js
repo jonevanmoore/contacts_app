@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { destroyContact, updateContact } from "../../reducers/contacts";
 
 // import DeleteIcon from '@mui/icons-material/Delete';
-import { Delete } from "@material-ui/icons";
+import { Delete, Edit } from "@material-ui/icons";
 
 const OneContact = ({ contact }) => {
     const dispatch = useDispatch()
@@ -47,53 +47,73 @@ const OneContact = ({ contact }) => {
 
     return (
         <>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', border: '1px white solid', borderRadius: '10px', marginBottom: '20px', padding: '20px' }}>
                 <div style={{ display: `${contactDisplay}` }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
 
-                    {contact?.name && (
-                        <span to={`/contacts/${contact?.id}`} className='contact_link'>{contact?.name}</span>
-                    )}
-                    {!contact?.name && (
-                        <span key={contact?.id}>Add name</span>
-                    )}
+                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', float: 'left' }}>
+                            <span style={{ fontSize: 'small' }}>Name</span>
+                            {contact?.name && (
+                                <span to={`/contacts/${contact?.id}`}>{contact?.name}</span>
+                            )}
+                            {!contact?.name && (
+                                <span key={contact?.id}>n/a</span>
+                            )}
+                        </div>
 
+                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px' }}>
+                            <span style={{ fontSize: 'small' }}>Phone</span>
+                            {contact?.phone && (
+                                <span>{contact?.phone}</span>
+                            )}
+                            {!contact?.phone && (
+                                <span>n/a</span>
+                            )}
+                        </div>
 
+                        <div style={{ display: 'flex', flexDirection: 'column', marginRight: '20px', float: 'right' }}>
+                            <span style={{ fontSize: 'small' }}>Email</span>
+                            {contact?.email && (
+                                <span>{contact?.email}</span>
+                            )}
+                            {!contact?.email && (
+                                <span>n/a</span>
+                            )}
+                        </div>
 
-                    {contact?.phone && (
-                        <span>{contact?.phone}</span>
-                    )}
-                    {!contact?.phone && (
-                        <span>Add Phone Number</span>
-                    )}
-
-
-
-                    {contact?.email && (
-                        <span>{contact?.email}</span>
-                    )}
-                    {!contact?.email && (
-                        <span>Add Email Address</span>
-
-                    )}
+                        <div>
+                            <Delete onClick={() => deleteOneContact(contact?.id)} className='icon-style delete-icon' />
+                            <Edit onClick={changeDisplay} className='icon-style edit-icon' />
+                        </div>
+                    </div>
                 </div>
+
                 <div style={{ display: `${editDisplay}` }}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
 
-                    <input
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                    ></input>
-                    <input
-                        value={phone}
-                        onChange={e => setPhone(e.target.value)}
-                    ></input>
-                    <input
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    ></input>
-                    <button onClick={updateOneContact}>UPDATE</button>
+                        <input
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                            placeholder='Name'
+                            maxLength={100}
+                        ></input>
+                        <input
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
+                            placeholder='Phone'
+                            maxLength={30}
+                        ></input>
+                        <input
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder='Email'
+                            maxLength={100}
+                        ></input>
+                        <button onClick={updateOneContact} className='add-con-btn' style={{ float: 'left' }}>Update</button>
+                        <button onClick={changeDisplay} className='add-con-btn'>Cancel</button>
+                    </div>
                 </div>
-                <Delete onClick={() => deleteOneContact(contact?.id)} />
-                <button onClick={changeDisplay}>EDIT</button>
+                {/* <button onClick={changeDisplay}>EDIT</button> */}
 
             </div>
         </>
