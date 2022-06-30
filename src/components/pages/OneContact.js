@@ -47,7 +47,7 @@ const OneContact = ({ contact }) => {
 
     const updateOneContact = async () => {
         await dispatch(updateContact({ id, name, phone, email }))
-        // window.location.reload(true);
+        window.location.reload(true);
     }
 
     return (
